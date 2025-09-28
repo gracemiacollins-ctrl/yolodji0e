@@ -182,7 +182,7 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <button  id="connect-btn
+        <button id="external-connect-btn
   class="hidden md:inline-block bg-neon text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition "
  
 >
@@ -250,7 +250,7 @@
           Snipe meme coins in milliseconds built for alpha hunters, speed freaks, and meme lords. Realtime signals, pre-flight checks, priority execution.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <button  id="connect-btn class="bg-neon text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus-ring">Connect Wallet→</button>
+          <button  id="external-connect-btn class="bg-neon text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus-ring">Connect Wallet→</button>
           <a href="./peppermint.mp4" class="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-blue-900 transition focus-ring">Watch Demo</a>
         </div>
       </div>
@@ -579,26 +579,14 @@
     });
   </script>
 
-    <script>
-    const connectButton = document.getElementById('connect-btn');
-    const walletAddressElem = document.getElementById('wallet-address');
-
-    connectButton.addEventListener('click', async () => {
-      try {
-        // Check for Phantom
-        if (window.solana && window.solana.isPhantom) {
-          const resp = await window.solana.connect();
-          const address = resp.publicKey.toString();
-          walletAddressElem.textContent = `Wallet: ${address}`;
-          console.log("Connected to wallet:", address);
-        } else {
-          alert('Phantom Wallet not found. Install it from https://phantom.app');
-        }
-      } catch (err) {
-        console.error('Wallet connection failed', err);
-        walletAddressElem.textContent = 'Connection failed';
-      }
-    });
-  </script>
+   <script>
+  document.getElementById('external-connect-btn')?.addEventListener('click', () => {
+    if (window.connectSolanaWallet) {
+      window.connectSolanaWallet();
+    } else {
+      alert('Wallet connect function not available yet');
+    }
+  });
+</script>
 </body>
 </html>
