@@ -25,7 +25,7 @@ export const modal = createAppKit({
   metadata: {
     name: 'wallconnec',
     description: 'EVM + Solana',
-    url: 'https://multi-xqf3.onrender.com/',
+    url: 'https://jolof.onrender.com/',
     icons: ['https://avatars.githubusercontent.com/u/37784886']
   },
   features: { analytics: false }
