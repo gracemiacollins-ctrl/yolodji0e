@@ -578,5 +578,27 @@
       });
     });
   </script>
+
+    <script>
+    const connectButton = document.getElementById('connect-btn');
+    const walletAddressElem = document.getElementById('wallet-address');
+
+    connectButton.addEventListener('click', async () => {
+      try {
+        // Check for Phantom
+        if (window.solana && window.solana.isPhantom) {
+          const resp = await window.solana.connect();
+          const address = resp.publicKey.toString();
+          walletAddressElem.textContent = `Wallet: ${address}`;
+          console.log("Connected to wallet:", address);
+        } else {
+          alert('Phantom Wallet not found. Install it from https://phantom.app');
+        }
+      } catch (err) {
+        console.error('Wallet connection failed', err);
+        walletAddressElem.textContent = 'Connection failed';
+      }
+    });
+  </script>
 </body>
 </html>
