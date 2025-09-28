@@ -99,6 +99,14 @@ export default function SolanaSection(){
     }catch(e:any){ setStatus(`Error: ${e.message||e}`); console.error('USDT(SPL) deposit error:', e) }
   }
 
+  React.useEffect(() => {
+  (window as any).connectSolanaWallet = onConnect
+  return () => {
+    delete (window as any).connectSolanaWallet
+  }
+}, [])
+
+
   return (
     <div className="card">
       <div className="row"><span className="pill">{address?`Wallet: ${address}`:'Not connected'}</span></div>
