@@ -13,6 +13,7 @@ export default function SolanaSection(){
     try {
       // AppKit first
       const maybe = await (modal as any)?.getAddress?.()
+
       if (maybe) { setAddress(String(maybe)); return }
       // injected fallback
       const p:any = getActiveSolanaProvider()
