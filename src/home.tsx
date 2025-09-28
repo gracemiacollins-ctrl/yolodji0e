@@ -319,7 +319,7 @@ const Home: React.FC = () => {
                 Connect Wallet→
               </button>
               <a
-                href="./Peppermint.mp4"
+                href="./assets/Peppermint.mp4"
                 className="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-blue-900 transition focus:outline-none focus:ring-2 focus:ring-white"
               >
                 Watch Demo
@@ -330,7 +330,7 @@ const Home: React.FC = () => {
           <div className="flex-1 max-w-lg w-full">
             <div className="rounded-xl shadow-lg overflow-hidden border border-white/5 aspect-video bg-black">
               <video
-                src="./Peppermint.mp4"
+                src="./assets/Peppermint.mp4"
                 autoPlay
                 muted
                 loop
