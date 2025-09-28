@@ -32,7 +32,6 @@
       margin: 0;
       min-height: 100vh;
       font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      /* base animated dark gradient */
       background: linear-gradient(120deg, #071026 0%, #0f172a 50%, #0b1220 100%);
       background-size: 300% 300%;
       animation: gradientShift 20s ease infinite;
@@ -48,7 +47,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* subtle noise texture (layer 1) */
     body::before{
       content:"";
       position:fixed;
@@ -59,8 +57,6 @@
       pointer-events:none;
     }
 
-    /* mint mist + soft grid overlay (layer 2)
-       uses radial mints to create a soft glow and then faint grid lines */
     body::after{
       content:"";
       position:fixed;
@@ -76,20 +72,19 @@
     }
      
     .video-wrap {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.04);
-  aspect-ratio: 16 / 9; /* keeps proportions */
-  background: black;
-}
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      aspect-ratio: 16 / 9;
+      background: black;
+    }
 
-.video-wrap video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* fills container without stretching */
-}
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-    /* card styles */
     .glass-card {
       background-color: rgba(6,10,18,0.62);
       backdrop-filter: blur(10px);
@@ -107,20 +102,14 @@
     }
     .gradient-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(38,254,7,0.12); }
 
-    /* refined green gradients (lighter touch) */
     .grad-1 { background: linear-gradient(135deg, rgba(180,255,210,0.16) 0%, rgba(38,254,7,0.06) 100%); }
     .grad-2 { background: linear-gradient(135deg, rgba(150,255,185,0.18) 0%, rgba(38,254,7,0.07) 100%); }
     .grad-3 { background: linear-gradient(135deg, rgba(120,245,170,0.14) 0%, rgba(20,140,70,0.08) 100%); }
     .grad-4 { background: linear-gradient(135deg, rgba(100,240,150,0.12) 0%, rgba(18,120,60,0.08) 100%); }
 
-    /* hero responsive typography */
     .hero-title { font-size: clamp(2rem, 6vw, 4.5rem); line-height: 1.02; }
     .hero-sub { font-size: clamp(1rem, 2.2vw, 1.25rem); }
 
-    /* video */
-    .video-wrap { border-radius: 12px; overflow:hidden; border:1px solid rgba(255,255,255,0.04); }
-
-    /* mobile panel (hidden by default) */
     .mobile-panel {
       position: fixed;
       inset: 0;
@@ -142,22 +131,17 @@
     .panel-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.46); z-index: 55; opacity: 0; pointer-events: none; transition: opacity .28s ease; }
     .panel-backdrop.open { opacity: 1; pointer-events: auto; }
 
-    /* focus ring helper */
     .focus-ring:focus { outline: 3px solid rgba(38,254,7,0.14); outline-offset: 4px; border-radius: 8px; }
 
-    /* FAQ arrow helper */
     .faq-rotate { transform: rotate(180deg); transition: transform .22s ease; }
 
-    /* small utilities */
     .text-neon { color: #26FE07; }
     .bg-neon { background: #26FE07; }
   </style>
 </head>
 
 <body class="text-blue-100">
-    
-
-  <!-- HEADER -->
+  <!-- HEADER (kept static — optional to render from React instead) -->
   <header class="fixed top-0 left-0 right-0 z-50 glass-card px-4 md:px-8 py-3 border-b border-blue-900">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       <a href="#hero" class="flex items-center gap-3">
@@ -170,7 +154,6 @@
         <span class="font-extrabold text-white text-lg leading-none">PEPPERMINT 2.0</span>
       </a>
 
-      <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-6 text-sm text-blue-200">
         <a href="#hero" class="hover:text-neon transition">Home</a>
         <a href="#key-benefits" class="hover:text-neon transition">Benefits</a>
@@ -183,10 +166,6 @@
 
       <div class="flex items-center gap-3">
         <button class="hidden md:inline-block bg-neon text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition">Connect Wallet</button>
-     
-        
-
-        <!-- Mobile menu button -->
         <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-panel" class="md:hidden p-2 rounded focus-ring bg-slate-800/40 text-blue-100">
           <span class="sr-only">Open menu</span>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden>
@@ -197,10 +176,8 @@
     </div>
   </header>
 
-  <!-- mobile panel backdrop -->
   <div id="panel-backdrop" class="panel-backdrop" tabindex="-1" aria-hidden="true"></div>
 
-  <!-- mobile panel -->
   <div id="mobile-panel" class="mobile-panel" role="dialog" aria-modal="true" aria-labelledby="mobileMenuLabel">
     <div class="w-full max-w-md mx-auto px-6">
       <div class="flex items-center justify-between mb-6">
@@ -231,200 +208,10 @@
     </div>
   </div>
 
-  <main class="pt-28 md:pt-36 px-6 max-w-7xl mx-auto relative z-10">
+  <!-- REACT MOUNT POINT: your React/TSX app will render everything inside this div -->
+  <div id="root"></div>
 
-    <!-- HERO -->
-    <section id="hero" class="rounded-3xl glass-card p-8 md:p-12 shadow-2xl flex flex-col lg:flex-row items-center gap-8 mb-12" data-aos="fade-up">
-      <div class="flex-1 text-center lg:text-left">
-        <h1 class="hero-title font-extrabold text-white">
-          <!--PEPPERMINT 2.0<br />-->
-          <span class="text-neon">Solana Meme Token Sniper🚀</span>
-        </h1>
-        <p class="hero-sub mt-5 text-blue-200 max-w-2xl">
-          Snipe meme coins in milliseconds built for alpha hunters, speed freaks, and meme lords. Realtime signals, pre-flight checks, priority execution.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <button  className="btn btn-sol" onClick={onConnect} class="bg-neon text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus-ring">Connect Wallet→</button>
-          <a href="#demo-video" class="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-blue-900 transition focus-ring">Watch Demo</a>
-        </div>
-      </div>
-
-      <div class="flex-1 max-w-lg w-full" id="demo-video" data-aos="zoom-in">
-        <div class="video-wrap shadow-lg rounded-xl overflow-hidden">
-          <!-- Placeholder video: replace src with your demo -->
-          <video src="Peppermint.mp4" autoplay muted loop playsinline class="w-full h-auto bg-black object-cover"></video>
- 
-        <p class="text-sm text-center text-blue-300 mt-3">Demo: Meme Token Sniping in Action</p>
-      </div>
-    </section>
-
-
-    <!-- BENEFITS -->
-    <section id="key-benefits" class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">Key Benefits</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="gradient-card grad-1" data-aos="fade-up"><h3 class="text-xl font-semibold mb-2">⚡ Real-time Signal Capture</h3><p class="text-sm">Monitors Telegram & Twitter feeds to capture token mints and drops instantly.</p></div>
-        <div class="gradient-card grad-2" data-aos="fade-up" data-aos-delay="40"><h3 class="text-xl font-semibold mb-2">🛡️ Pre-Trade Validation</h3><p class="text-sm">Contract checks, decimals, liquidity checks, and anti-rug heuristics.</p></div>
-        <div class="gradient-card grad-3" data-aos="fade-up" data-aos-delay="80"><h3 class="text-xl font-semibold mb-2">📊 Risk Ranking</h3><p class="text-sm">Signals ranked by rules and computed risk for smarter execution order.</p></div>
-        <div class="gradient-card grad-4" data-aos="fade-up" data-aos-delay="120"><h3 class="text-xl font-semibold mb-2">🚀 Ultra-Fast Execution</h3><p class="text-sm">Optimized routing and premium RPCs for minimal latency.</p></div>
-        <div class="gradient-card grad-3" data-aos="fade-up" data-aos-delay="160"><h3 class="text-xl font-semibold mb-2">🤖 Automated Post-Trade Logic</h3><p class="text-sm">Auto sell, TP/SL, and notifications via Telegram/Discord.</p></div>
-        <div class="gradient-card grad-2" data-aos="fade-up" data-aos-delay="200"><h3 class="text-xl font-semibold mb-2">🔒 Security First</h3><p class="text-sm">Rug filters, suspicious owner detection, zero-liquidity checks.</p></div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section id="how-it-works" class="mb-20">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-10">How It Works</h2>
-      <div class="space-y-6 max-w-4xl mx-auto">
-        <div class="glass-card p-5 rounded-2xl flex gap-4 items-start" data-aos="fade-up">
-          <div class="w-12 h-12 rounded-full bg-memeBlue flex items-center justify-center font-bold text-black">1</div>
-          <div><h3 class="font-semibold text-white">Signal capture</h3><p class="text-blue-200 text-sm mt-1">Monitors subscribed Telegram groups and Twitter accounts to extract candidate tokens or mint addresses in real time.</p></div>
-        </div>
-        <div class="glass-card p-5 rounded-2xl flex gap-4 items-start" data-aos="fade-up" data-aos-delay="80">
-          <div class="w-12 h-12 rounded-full bg-neon flex items-center justify-center font-bold text-black">2</div>
-          <div><h3 class="font-semibold text-white">Pre-flight checks</h3><p class="text-blue-200 text-sm mt-1">Contract format, decimals, recent activity, LP checks and anti-rug heuristics are evaluated.</p></div>
-        </div>
-        <div class="glass-card p-5 rounded-2xl flex gap-4 items-start" data-aos="fade-up" data-aos-delay="160">
-          <div class="w-12 h-12 rounded-full bg-memePink flex items-center justify-center font-bold text-black">3</div>
-          <div><h3 class="font-semibold text-white">Priority queue</h3><p class="text-blue-200 text-sm mt-1">Verified signals ranked by rules + computed risk and queued for execution.</p></div>
-        </div>
-        <div class="glass-card p-5 rounded-2xl flex gap-4 items-start" data-aos="fade-up" data-aos-delay="240">
-          <div class="w-12 h-12 rounded-full bg-memeBlue flex items-center justify-center font-bold text-black">4</div>
-          <div><h3 class="font-semibold text-white">Optimized execution</h3><p class="text-blue-200 text-sm mt-1">Chooses fastest RPC, optimizes fees & slippage, broadcasts quickly.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SPEED -->
-    <section id="speed" class="mb-20">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">Speed Advantage</h2>
-      <p class="text-center text-blue-300 mb-10">Milliseconds matter. PEPPERMINT 2.0 runs with lightning RPCs & optimized routing.</p>
-      <div class="gradient-card grad-1 max-w-2xl mx-auto text-center" data-aos="zoom-in">
-        <h3 class="text-xl font-bold mb-2">⚡ Sub-200ms Trade Execution</h3>
-        <p class="text-sm">With premium RPC nodes and low-level optimizations, your trades land before the herd even clicks.</p>
-      </div>
-    </section>
-
-    <!-- PROFITABILITY -->
-    <section id="profitability" class="mb-20">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">Profitability & Risk</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="gradient-card grad-3" data-aos="fade-right"><h3 class="text-xl font-bold">📈 Smarter Entry</h3><p class="text-sm">Token rankings help you avoid rugs and focus on plays with better upside.</p></div>
-        <div class="gradient-card grad-4" data-aos="fade-left"><h3 class="text-xl font-bold">💡 Strategy Support</h3><p class="text-sm">Choose degen mode for fast flips or safer mode for balanced entries.</p></div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="mb-20 relative z-10">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-4">Pricing</h2>
-      <p class="text-center text-blue-300 mb-8">Choose your plan. Cancel anytime.</p>
-
-      <!-- Toggle -->
-      <div class="flex justify-center mb-10">
-        <div class="flex items-center bg-slate-800/60 rounded-full p-1 text-sm">
-          <button id="monthly-btn" class="px-4 py-2 rounded-full bg-neon text-black font-semibold">Monthly</button>
-          <button id="yearly-btn" class="px-4 py-2 rounded-full text-blue-200">Yearly</button>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <!-- Basic -->
-        <div class="rounded-2xl p-6 grad-1 border border-green-600/18 shadow-lg hover:scale-105 transition">
-          <h3 class="text-xl font-bold text-white mb-2">Basic</h3>
-          <p class="text-blue-200 mb-4">Perfect for beginners testing the waters.</p>
-          <div class="price text-3xl font-extrabold text-neon mb-6" data-monthly="49" data-yearly="490">$49<span class="text-lg text-blue-300 font-medium">/mo</span></div>
-          <ul class="space-y-2 text-sm text-blue-100">
-            <li>✅ Access to basic signals</li>
-            <li>✅ Community support</li>
-            <li>✅ Limited execution speed</li>
-          </ul>
-          <a href="#waitlist" class="mt-6 block text-center bg-neon text-black font-semibold py-3 rounded-lg hover:scale-105 transition">Get Started</a>
-        </div>
-
-        <!-- Pro -->
-        <div class="rounded-2xl p-6 grad-2 border-2 border-neon shadow-2xl hover:scale-110 transition relative">
-          <span class="absolute top-0 right-0 bg-neon text-black text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</span>
-          <h3 class="text-xl font-bold text-white mb-2">Pro</h3>
-          <p class="text-blue-200 mb-4">For serious meme traders who want speed.</p>
-          <div class="price text-3xl font-extrabold text-neon mb-6" data-monthly="149" data-yearly="1490">$149<span class="text-lg text-blue-300 font-medium">/mo</span></div>
-          <ul class="space-y-2 text-sm text-blue-100">
-            <li>✅ Priority execution</li>
-            <li>✅ Premium RPC access</li>
-            <li>✅ Real-time risk ranking</li>
-            <li>✅ Pro trader community</li>
-          </ul>
-          <a href="#waitlist" class="mt-6 block text-center bg-neon text-black font-semibold py-3 rounded-lg hover:scale-105 transition">Go Pro</a>
-        </div>
-
-        <!-- Elite -->
-        <div class="rounded-2xl p-6 grad-3 border border-green-600/18 shadow-lg hover:scale-105 transition">
-          <h3 class="text-xl font-bold text-white mb-2">Elite</h3>
-          <p class="text-blue-200 mb-4">Maximum performance for top-tier degens.</p>
-          <div class="price text-3xl font-extrabold text-neon mb-6" data-monthly="299" data-yearly="2990">$299<span class="text-lg text-blue-300 font-medium">/mo</span></div>
-          <ul class="space-y-2 text-sm text-blue-100">
-            <li>✅ Dedicated node routing</li>
-            <li>✅ Early-access features</li>
-            <li>✅ 1-on-1 strategy support</li>
-            <li>✅ Private alpha channel</li>
-          </ul>
-          <a href="#waitlist" class="mt-6 block text-center bg-neon text-black font-semibold py-3 rounded-lg hover:scale-105 transition">Join Elite</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="mb-20 max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">FAQ</h2>
-      <div class="space-y-4">
-        <div class="rounded-xl bg-slate-800/60 overflow-hidden">
-          <button class="w-full flex justify-between items-center p-4 text-left font-semibold faq-toggle focus-ring" aria-expanded="false">
-            <span>Does the bot guarantee profits?</span>
-            <svg class="w-5 h-5 faq-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="px-4 pb-4 text-sm text-blue-200 hidden">No. Trading cryptocurrencies is risky. The bot helps automate entry and execution but cannot guarantee returns.
-.</div>
-        </div>
-
-        <div class="rounded-xl bg-slate-800/60 overflow-hidden">
-          <button class="w-full flex justify-between items-center p-4 text-left font-semibold faq-toggle focus-ring" aria-expanded="false">
-            <span>What sources can I monitor?</span>
-            <svg class="w-5 h-5 faq-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="px-4 pb-4 text-sm text-blue-200 hidden">Telegram channels/groups and Twitter accounts. Integrations with Discord or other feeds can be added per plan.</div>
-        </div>
-
-        <div class="rounded-xl bg-slate-800/60 overflow-hidden">
-          <button class="w-full flex justify-between items-center p-4 text-left font-semibold faq-toggle focus-ring" aria-expanded="false">
-            <span>How do you prevent scams?</span>
-            <svg class="w-5 h-5 faq-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="px-4 pb-4 text-sm text-blue-200 hidden">The bot runs automated pre-checks (liquidity presence, token metadata, owner flags) and can be configured to reject suspicious tokens.</div>
-        </div>
-
-        <div class="rounded-xl bg-slate-800/60 overflow-hidden">
-          <button class="w-full flex justify-between items-center p-4 text-left font-semibold faq-toggle focus-ring" aria-expanded="false">
-            <span>Can I run this on my own infrastructure?</span>
-            <svg class="w-5 h-5 faq-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="px-4 pb-4 text-sm text-blue-200 hidden"> Yes, options include cloud deployment with premium RPCs or managed hosting for lower-friction access.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WAITLIST -->
-    <section id="waitlist" class="mb-20 text-center">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Join the Waitlist</h2>
-      <p class="text-blue-300 mb-6">Be the first to get access to PEPPERMINT 2.0.</p>
-      <form id="waitlist-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4" onsubmit="return false;">
-        <input id="waitlist-email" type="email" placeholder="Enter your email" required class="flex-1 px-4 py-3 rounded-lg border border-slate-700 bg-slate-900/60 text-white focus:outline-none focus:ring-2 focus:ring-neon" />
-        <button id="waitlist-submit" type="submit" class="bg-neon text-black font-semibold px-6 py-3 rounded-lg hover:scale-105 transition">Join</button>
-      </form>
-      <p id="waitlist-msg" class="text-sm mt-3 hidden"></p>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
+  <!-- FOOTER (kept static; you can render from React instead) -->
   <footer class="bg-slate-900/70 border-t border-slate-700 py-6 text-center text-blue-400">
     <div class="max-w-7xl mx-auto px-6">
       <div class="mb-2">&copy; <span id="yr"></span> PEPPERMINT 2.0  Built for crypto degens.</div>
@@ -437,6 +224,7 @@
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+    // init AOS if you want to use it for static items
     AOS.init({ duration: 700, easing: 'ease-in-out', once: true });
 
     // set footer year
@@ -452,10 +240,8 @@
       mobilePanel.classList.add('open');
       panelBackdrop.classList.add('open');
       mobileBtn.setAttribute('aria-expanded','true');
-      // focus first link
       const firstLink = mobilePanel.querySelector('nav a');
       firstLink && firstLink.focus();
-      // lock scroll
       document.body.style.overflow = 'hidden';
     }
     function closeMobileMenu() {
@@ -472,105 +258,16 @@
     });
     mobileClose && mobileClose.addEventListener('click', closeMobileMenu);
     panelBackdrop && panelBackdrop.addEventListener('click', closeMobileMenu);
-
-    // close on escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobilePanel.classList.contains('open')) closeMobileMenu();
     });
-
-    // close mobile on nav link click (small delay allows scroll)
     mobilePanel.querySelectorAll('nav a').forEach(a => {
       a.addEventListener('click', () => setTimeout(closeMobileMenu, 80));
     });
-
-    /* PRICING: monthly/yearly toggle */
-    const monthlyBtn = document.getElementById('monthly-btn');
-    const yearlyBtn = document.getElementById('yearly-btn');
-    const priceEls = document.querySelectorAll('.price');
-
-    function showMonthly() {
-      monthlyBtn.classList.add('bg-neon','text-black');
-      yearlyBtn.classList.remove('bg-neon','text-black');
-      yearlyBtn.classList.add('text-blue-200');
-      priceEls.forEach(p => p.innerHTML = `$${p.dataset.monthly}<span class="text-lg text-blue-300 font-medium">/mo</span>`);
-    }
-    function showYearly() {
-      yearlyBtn.classList.add('bg-neon','text-black');
-      monthlyBtn.classList.remove('bg-neon','text-black');
-      monthlyBtn.classList.add('text-blue-200');
-      priceEls.forEach(p => p.innerHTML = `$${p.dataset.yearly}<span class="text-lg text-blue-300 font-medium">/yr</span>`);
-    }
-    monthlyBtn && monthlyBtn.addEventListener('click', showMonthly);
-    yearlyBtn && yearlyBtn.addEventListener('click', showYearly);
-    // default
-    showMonthly();
-
-    /* FAQ accordion (single-open behavior) */
-    document.querySelectorAll('.faq-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const answer = btn.nextElementSibling;
-        const icon = btn.querySelector('.faq-arrow');
-        if (!answer) return;
-        const isHidden = answer.classList.contains('hidden');
-        // close others
-        document.querySelectorAll('.faq-toggle').forEach(other => {
-          if (other !== btn) {
-            other.nextElementSibling && other.nextElementSibling.classList.add('hidden');
-            const otherIcon = other.querySelector('.faq-arrow');
-            if (otherIcon) otherIcon.classList.remove('faq-rotate');
-            other.setAttribute('aria-expanded','false');
-          }
-        });
-        // toggle this
-        answer.classList.toggle('hidden', !isHidden ? true : false);
-        if (icon) icon.classList.toggle('faq-rotate', isHidden);
-        btn.setAttribute('aria-expanded', !!isHidden);
-      });
-    });
-
-    /* Waitlist front-end behavior (demo only) */
-    const waitlistForm = document.getElementById('waitlist-form');
-    const waitlistEmail = document.getElementById('waitlist-email');
-    const waitlistSubmit = document.getElementById('waitlist-submit');
-    const waitlistMsg = document.getElementById('waitlist-msg');
-
-    waitlistForm && waitlistForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      waitlistMsg.classList.add('hidden');
-      if (!waitlistEmail.value || !waitlistEmail.checkValidity()) {
-        waitlistMsg.textContent = 'Please enter a valid email.';
-        waitlistMsg.classList.remove('hidden');
-        waitlistMsg.classList.remove('text-green-400');
-        waitlistMsg.classList.add('text-red-400');
-        waitlistEmail.focus();
-        return;
-      }
-      waitlistSubmit.disabled = true;
-      waitlistSubmit.textContent = 'Sending...';
-      // simulate network call
-      setTimeout(() => {
-        waitlistSubmit.disabled = false;
-        waitlistSubmit.textContent = 'Join';
-        waitlistMsg.textContent = "Thanks — you're on the waitlist! We'll notify you soon.";
-        waitlistMsg.classList.remove('hidden');
-        waitlistMsg.classList.remove('text-red-400');
-        waitlistMsg.classList.add('text-green-400');
-        waitlistEmail.value = '';
-      }, 900);
-    });
-
-    /* smooth anchor scrolling (for internal navigation) */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (!href || href === '#' ) return;
-        const el = document.querySelector(href);
-        if (el) {
-          e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
   </script>
+
+  <!-- Your React entry — ADDED: -->
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
+
