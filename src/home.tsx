@@ -200,13 +200,12 @@ const Home: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* <button
+            <button
               onClick={handleConnectWallet}
               className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
             >
               Connect Wallet
-            </button> */}
-            <SolanaSection />
+            </button>
             {/* Mobile menu button */}
             <button
               onClick={toggleMobileMenu}
@@ -374,7 +373,6 @@ const Home: React.FC = () => {
                 Connect Wallet→
               </button> */}
               <SolanaSection />
-
               <a
                 href="./assets/Peppermint.mp4"
                 className="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-blue-900 transition focus:outline-none focus:ring-2 focus:ring-white"

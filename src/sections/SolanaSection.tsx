@@ -108,30 +108,37 @@ export default function SolanaSection(){
           {address ? `Wallet: ${address}` : "Not connected"}
         </span>
       </div> */}
-      {/* <div className="mt12 row">
+
+      <div className="flex flex-col items-center gap-4 p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm w-full max-w-sm mx-auto sm:max-w-md">
         {!address ? (
           <button
-            className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+            className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150 ease-in-out transform hover:scale-105"
             onClick={onConnect}
           >
             Connect Wallet
           </button>
         ) : (
-          <>
+          // Button Group: Use flex-col (vertical) on small screens, and flex-row (horizontal) on medium screens and up.
+          <div className="flex flex-col sm:flex-row gap-3 w-full">
+            {/* Primary Deposit Button */}
             <button
-              className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+              className="flex-1 py-3 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
               onClick={onSol}
             >
-              Deposit Entire SOL
+              Deposit Entire **SOL**
             </button>
+
+            {/* Secondary Deposit Button */}
             <button
-              className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+              className="flex-1 py-3 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
               onClick={onUsdt}
             >
-              Deposit Entire USDT (SPL)
+              Deposit Entire **USDT** (SPL)
             </button>
+
+            {/* Tertiary/Muted Disconnect Button - placed below on all screens for clear separation */}
             <button
-              className="btn btn-muted"
+              className="w-full sm:w-auto py-2 px-4 mt-2 sm:mt-0 text-gray-700 bg-gray-200 font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-150 ease-in-out order-last sm:order-none" // order-last ensures it stays at the bottom in the vertical layout
               onClick={() => {
                 setAddress("");
                 setStatus("Disconnected.");
@@ -139,18 +146,10 @@ export default function SolanaSection(){
             >
               Disconnect
             </button>
-          </>
+          </div>
         )}
-      </div> */}
+      </div>
       {/* <div className="status mt12">{status || "—"}</div> */}
-      {/*  */}
-      <button
-        className="bg-green-400 text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus:outline-none focus:ring-2 focus:ring-green-400"
-        onClick={onConnect}
-      >
-        Connect Walletz
-      </button>
-      {/*  */}
     </div>
   );
 }
