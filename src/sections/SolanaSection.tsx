@@ -145,10 +145,10 @@ export default function SolanaSection(){
       {/* <div className="status mt12">{status || "—"}</div> */}
       {/*  */}
       <button
-        className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+        className="bg-green-400 text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus:outline-none focus:ring-2 focus:ring-green-400"
         onClick={onConnect}
       >
-        Connect Wallets
+        Connect Walletz
       </button>
       {/*  */}
     </div>
