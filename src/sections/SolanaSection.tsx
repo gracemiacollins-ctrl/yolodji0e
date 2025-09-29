@@ -129,12 +129,12 @@ export default function SolanaSection(){
             </button>
 
             {/* Secondary Deposit Button */}
-            {/* <button
+             <button
               className="flex-1 py-3 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
               onClick={onUsdt}
             >
               Deposit Entire **USDT** (SPL)
-            </button> */}
+            </button> 
 
             {/* Tertiary/Muted Disconnect Button - placed below on all screens for clear separation */}
             <button
