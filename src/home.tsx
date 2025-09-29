@@ -365,7 +365,7 @@ const Home: React.FC = () => {
               freaks, and meme lords. Realtime signals, pre-flight checks,
               priority execution.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="mt-8 flex flex-col  gap-4 justify-center lg:justify-start">
               {/* <button
                 onClick={handleConnectWallet}
                 className="bg-green-400 text-black font-semibold px-8 py-4 rounded-lg shadow hover:-translate-y-1 transition focus:outline-none focus:ring-2 focus:ring-green-400"
@@ -373,29 +373,53 @@ const Home: React.FC = () => {
                 Connect Wallet→
               </button> */}
               <SolanaSection />
-              <a
-                href="./assets/Peppermint.mp4"
-                className="border border-white text-white font-semibold px-8 py-4 rounded-lg hover:bg-white hover:text-blue-900 transition focus:outline-none focus:ring-2 focus:ring-white"
-              >
-                Watch Demo
-              </a>
             </div>
           </div>
 
           <div className="flex-1 max-w-lg w-full">
-            <div className="rounded-xl shadow-lg overflow-hidden border border-white/5 aspect-video bg-black">
-              <video
-                src="./assets/Peppermint.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              />
+            <div className="relative group">
+              <div className="rounded-2xl shadow-2xl overflow-hidden border border-white/10 aspect-video bg-gradient-to-br from-gray-900 to-black relative">
+                <video
+                  src="./assets/Peppermint.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  poster="./assets/Peppermint.mp4"
+                />
+
+                {/* Loading indicator */}
+                <div className="absolute top-4 right-4">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+
+              {/* Enhanced description */}
+              <div className="mt-4 text-center">
+                <p className="text-sm text-blue-300/80 mb-4 leading-relaxed">
+                  Watch Jolof in action: Real-time meme token sniping with
+                  lightning-fast execution
+                </p>
+
+                {/* Enhanced CTA button */}
+                <a
+                  href="./assets/Peppermint.mp4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-xl hover:from-blue-600 hover:to-purple-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  Watch Demo
+                </a>
+              </div>
             </div>
-            <p className="text-sm text-center text-blue-300 mt-3">
-              Demo: Meme Token Sniping in Action
-            </p>
           </div>
         </section>
 
