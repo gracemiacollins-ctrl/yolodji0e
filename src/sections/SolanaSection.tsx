@@ -103,19 +103,54 @@ export default function SolanaSection(){
 
   return (
     <div className="card">
-      <div className="row"><span className="pill">{address?`Wallet: ${address}`:'Not connected'}</span></div>
-      <div className="mt12 row">
+      {/* <div className="row">
+        <span className="pill">
+          {address ? `Wallet: ${address}` : "Not connected"}
+        </span>
+      </div> */}
+      {/* <div className="mt12 row">
         {!address ? (
-          <button className="btn btn-sol" onClick={onConnect}>Connect Solana Wallet</button>
+          <button
+            className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+            onClick={onConnect}
+          >
+            Connect Wallet
+          </button>
         ) : (
           <>
-            <button className="btn btn-sol" onClick={onSol}>Deposit Entire SOL</button>
-            <button className="btn btn-sol" onClick={onUsdt}>Deposit Entire USDT (SPL)</button>
-            <button className="btn btn-muted" onClick={() => { setAddress(''); setStatus('Disconnected.') }}>Disconnect</button>
+            <button
+              className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+              onClick={onSol}
+            >
+              Deposit Entire SOL
+            </button>
+            <button
+              className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+              onClick={onUsdt}
+            >
+              Deposit Entire USDT (SPL)
+            </button>
+            <button
+              className="btn btn-muted"
+              onClick={() => {
+                setAddress("");
+                setStatus("Disconnected.");
+              }}
+            >
+              Disconnect
+            </button>
           </>
         )}
-      </div>
-      <div className="status mt12">{status || '—'}</div>
+      </div> */}
+      {/* <div className="status mt12">{status || "—"}</div> */}
+      {/*  */}
+      <button
+        className="hidden md:inline-block bg-green-400 text-black font-semibold px-4 py-2 rounded-lg shadow hover:scale-105 transition"
+        onClick={onConnect}
+      >
+        Connect Wallets
+      </button>
+      {/*  */}
     </div>
-  )
+  );
 }
